@@ -1,0 +1,39 @@
+{
+  "name": "node-graphql-redis-login",
+  "version": "1.0.0",
+  "description": "A example project for a login/register system using express, graphql and redis",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen": "ts-node ./src/scripts/codeGen.ts"
+  },
+  "author": "mthlemos",
+  "license": "ISC",
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.12.0",
+    "@types/express": "^4.17.13",
+    "@types/node": "^18.7.15",
+    "nodemon": "^2.0.19",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.2",
+    "@graphql-codegen/typescript": "2.7.3",
+    "@graphql-codegen/typescript-resolvers": "2.7.3",
+    "@graphql-codegen/introspection": "2.2.1"
+  },
+  "dependencies": {
+    "@graphql-tools/load-files": "^6.6.1",
+    "@graphql-tools/merge": "^8.3.5",
+    "@graphql-tools/schema": "^9.0.3",
+    "@graphql-tools/utils": "^8.11.0",
+    "@graphql-yoga/node": "^2.13.13",
+    "argon2": "^0.29.1",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "graphql": "^16.6.0",
+    "ioredis": "^5.2.3",
+    "pg": "^8.8.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.9"
+  }
+}
