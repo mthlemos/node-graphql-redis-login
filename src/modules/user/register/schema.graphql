@@ -6,7 +6,3 @@ input RegisterInput {
 type Mutation {
     register(data: RegisterInput!): User!
 }
-
-type Query {
-    test: Boolean!
-}

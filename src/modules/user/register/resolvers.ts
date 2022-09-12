@@ -1,4 +1,4 @@
-import type { Resolvers } from "../../../generated/graphqlTypes";
+import type { Resolvers } from "../../../types/graphqlTypes";
 import { UserModel } from "../../../entities/User";
 import * as argon2 from "argon2";
 import { GraphQLYogaError } from "@graphql-yoga/node";

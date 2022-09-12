@@ -1,0 +1,8 @@
+type UserSession {
+    Ip: String!
+    LoggedInAt: String!
+}
+
+type Query {
+    loggedInSessions(userId: ID): [UserSession!]!
+}

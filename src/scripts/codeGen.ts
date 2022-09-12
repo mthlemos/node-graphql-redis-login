@@ -8,12 +8,13 @@ import { genSchema } from '../utils/genSchema';
     await generate({
         schema: schema,
         config: {
+            contextType: "../types/context#Context",
             mappers: {
                 User: "../entities/User#UserModel"
             }
         },
         generates: {
-            [process.cwd() + '/src/generated/graphqlTypes.d.ts']: {
+            [process.cwd() + '/src/types/graphqlTypes.d.ts']: {
                 plugins: ['typescript', 'typescript-resolvers']
             }
         }

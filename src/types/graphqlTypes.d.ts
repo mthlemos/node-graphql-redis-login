@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo } from 'graphql';
 import { UserModel } from '../entities/User';
+import { Context } from '../types/context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -23,6 +24,7 @@ export type LoginInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   login: Scalars['String'];
+  logout: Scalars['String'];
   register: User;
 };
 
@@ -38,7 +40,12 @@ export type MutationRegisterArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  test: Scalars['Boolean'];
+  loggedInSessions: Array<UserSession>;
+};
+
+
+export type QueryLoggedInSessionsArgs = {
+  userId?: InputMaybe<Scalars['ID']>;
 };
 
 export type RegisterInput = {
@@ -51,6 +58,12 @@ export type User = {
   email: Scalars['String'];
   id: Scalars['ID'];
   password: Scalars['String'];
+};
+
+export type UserSession = {
+  __typename?: 'UserSession';
+  Ip: Scalars['String'];
+  LoggedInAt: Scalars['String'];
 };
 
 
@@ -130,6 +143,7 @@ export type ResolversTypes = {
   RegisterInput: RegisterInput;
   String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<UserModel>;
+  UserSession: ResolverTypeWrapper<UserSession>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -142,27 +156,36 @@ export type ResolversParentTypes = {
   RegisterInput: RegisterInput;
   String: Scalars['String'];
   User: UserModel;
+  UserSession: UserSession;
 };
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   login?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'data'>>;
+  logout?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   register?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'data'>>;
 };
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  test?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  loggedInSessions?: Resolver<Array<ResolversTypes['UserSession']>, ParentType, ContextType, Partial<QueryLoggedInSessionsArgs>>;
 };
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Resolvers<ContextType = any> = {
+export type UserSessionResolvers<ContextType = Context, ParentType extends ResolversParentTypes['UserSession'] = ResolversParentTypes['UserSession']> = {
+  Ip?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  LoggedInAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type Resolvers<ContextType = Context> = {
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
+  UserSession?: UserSessionResolvers<ContextType>;
 };
 
